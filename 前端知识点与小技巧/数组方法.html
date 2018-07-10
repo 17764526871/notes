@@ -1,0 +1,128 @@
+ b<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // push() pop() unshift() shift()
+  // es6：filter() forEach() some() every() map()等
+  // 注意
+  // 1. forEach存在的问题，循环停不下来
+  // 2. filter、map 方法的使用
+  var arr = [12, 34, 56, 89, 78, 23, 45, 19,12,19];
+
+  //filter方法返回一个由符合函数要求的元素组成的新数组-------------------------------------------
+  // 1. 要求：把arr中所有大于30的元素放到一个新数组中。
+  // 原始方法：
+  var newArr = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] > 30) {
+      newArr.push(arr[i])
+    }
+  }
+  // API的方法：
+  //调用数组的filter方法，添加过滤方法，符合规则的元素会被存放到新数组里
+  //element:表示数组里的元素;index:表示索引值;array:表示调用filter方法的数组。
+  var newArr = arr.filter(function (element, index, array) {
+    return element > 30;
+  });
+  console.log(arr); //filter方法不会改变原数组里的数据[12,34,56,89,78,23,45,19];
+  console.log(newArr); //新数组里保存符合要求的元素[34, 56, 89, 78, 45]
+
+
+  //map方法让数组中的每个元素都调用一次提供的函数，将调用的后的结果存放到一个新数组里并返回。------------
+  // 2. 要求：件数组中的每一个元素后面添加一个字符串'0'放到一个新数组中。
+  // 原始方法
+  var newArr = [];
+  for (var i = 0; i < arr.length; i++) {
+    newArr.push(arr[i] + '0');
+  }
+  // API的方法
+  var newArr = arr.map(function (element, index, array) {
+    //在数组里的每一个元素的最后面都添加一个字符串"0"
+    return element + "0";
+  });
+  console.log(newArr); //["120", "340", "560", "890", "780", "230", "450", "190"]
+  console.log(arr); //map方法不会改变原数组里的数据 [12,34,56,89,78,23,45,19]
+
+  //forEach() 方法对数组的每个元素执行一次提供的函数,且这个函数没有返回值------------------------------
+  // 3.要求：打印每一个元素
+  // 原始方法
+  for (var i = 0; i < arr.length; i++) {
+    console.log("第" + i + "个元素是" + arr[i]);
+  }
+  // API方法
+  var result = arr.forEach(function (element, index, array) {
+    //数组里的每一个元素都会被打印
+    console.log("第" + index + "个元素是" + element);
+  });
+  console.log(result); //函数没有返回值
+
+  //some() 方法测试数组中的某些元素是否通过由提供的函数实现的测试.----------------------------------
+  // 4.要求：判断数组中是否有元素大于50
+  // 原始方法
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] > 50) {
+      result = true;
+      break;
+    }
+  }
+  // API方法
+  var result = arr.some(function (element, index, array) {
+    //数组里否有一些元素大于50.只要有一个元素大于，就返回true
+    console.log(element); //12,34,56
+    return element > 50;
+  });
+  console.log(result); //true
+
+  //every() 方法测试数组的所有元素是否都通过了指定函数的测试。----------------------------------------
+  // 5.要求：判断数组中的每个元素是否都大于50
+  // 原始方法
+  var result = true;
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] < 50) {
+      result = false;
+      break;
+    }
+  }
+  // API方法
+  result = arr.every(function (element, index, array) {
+    //数组里是否每一个元素都大于50.只有在所有的数都大于50时，才返回true
+    console.log(element);
+    return element > 50;
+  });
+  console.log(result); //false
+
+//  arr.join() 数组分割字符串，返回回分割好的字符串，不传参数，默认逗号分割
+//  传空字符串，会直接连接成字符串形式
+//  arr.reverse() 翻转数组 操作元数组
+//  arr.sort()  数组排序  a - b 小到大排序 操作元数组
+
+//  arr.sort(function(a,b){
+//    return a-b
+//  })
+//  console.log(arr);
+
+//  数组的拼接
+//  concat
+//  arrone.concat(arrtwo)
+
+//  slice 截取数组 ，返回新的数组，不操作元素组
+//  arr.slice(起始值，终止值) 不传参,复制一个新的数组
+//   传入1个值，截取到最后，包括最后一个值
+//  传入两个值，截取的不包括最后一个值
+
+// arr.splice(起始值,delectcount,3) 删除或者数据元素，操作原来的数组
+
+
+//  indexof() 不再返回-1，在返回下表 数组查重
+
+//数组清空的方法
+arr.splice(0)
+  arr.length = 0
+  arr = []
+</script>
+</body>
+</html>
